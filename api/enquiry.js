@@ -27,23 +27,25 @@ export default async function handler(req, res) {
   const key = process.env.RESEND_API_KEY;
   if (key) {
     const TO = (process.env.ENQUIRY_TO || 'Ian_r@eircom.net,colmring2020@gmail.com').split(',');
-    const FROM = process.env.ENQUIRY_FROM || 'EPC Components <onboarding@resend.dev>';
+    const FROM = process.env.ENQUIRY_FROM || 'EPC Components <enquiries@epccomponents.ie>';
     const send = (payload) => fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + key, 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
     try {
-      await send({
+      const r1 = await send({
         from: FROM, to: TO, reply_to: email,
         subject: 'New enquiry (' + type + ') — ' + name,
         text: 'Name: ' + name + '\nEmail: ' + email + '\nPhone: ' + (phone || '-') + '\nType: ' + type + '\n\n' + message,
       });
-      await send({
+      if (!r1.ok) console.error('ENQUIRY NOTIFY FAILED', r1.status, await r1.text());
+      const r2 = await send({
         from: FROM, to: [email],
         subject: 'We’ve received your enquiry — EPC Components',
         text: 'Hi ' + name + ',\n\nThanks for getting in touch with EPC Components. Your enquiry (' + type + ') has been received and we’ll come back to you shortly with a straight answer on scope, programme and price.\n\nIf it’s urgent, ring 083 022 1056.\n\nIan Ring\nEPC Components — Structural Steel Design & Engineering\nDublin · Nationwide',
       });
+      if (!r2.ok) console.error('ENQUIRY AUTOREPLY FAILED', r2.status, await r2.text());
     } catch (e) { console.error('ENQUIRY EMAIL ERROR', e); }
   }
 
