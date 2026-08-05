@@ -14,7 +14,7 @@ fetch('/api/enquiry',{method:'POST',headers:{'Content-Type':'application/json'},
 .then(function(){if(st){st.className='f-status ok';st.textContent='Enquiry sent \u2014 confirmation on its way to your inbox.'}f.reset();btn.textContent='Sent';})
 .catch(function(){
 var n=encodeURIComponent(data.name),em=encodeURIComponent(data.email),ph=encodeURIComponent(data.phone),t=encodeURIComponent(data.type),msg=encodeURIComponent(data.message);
-location.href='mailto:colmring2020@gmail.com?subject=Project%20Enquiry%20('+t+')&body=Name:%20'+n+'%0AEmail:%20'+em+'%0APhone:%20'+ph+'%0A%0A'+msg;
+location.href='mailto:Ian_r@eircom.net?cc=colmring2020@gmail.com&subject=Project%20Enquiry%20('+t+')&body=Name:%20'+n+'%0AEmail:%20'+em+'%0APhone:%20'+ph+'%0A%0A'+msg;
 btn.disabled=false;btn.textContent='Send enquiry';
 });
 })}
