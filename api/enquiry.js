@@ -26,7 +26,7 @@ export default async function handler(req, res) {
   // 2. Email notification — best effort, never blocks the enquiry being recorded
   const key = process.env.RESEND_API_KEY;
   if (key) {
-    const TO = process.env.ENQUIRY_TO || 'colmring2020@gmail.com';
+    const TO = (process.env.ENQUIRY_TO || 'Ian_r@eircom.net,colmring2020@gmail.com').split(',');
     const FROM = process.env.ENQUIRY_FROM || 'EPC Components <onboarding@resend.dev>';
     const send = (payload) => fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -35,7 +35,7 @@ export default async function handler(req, res) {
     });
     try {
       await send({
-        from: FROM, to: [TO], reply_to: email,
+        from: FROM, to: TO, reply_to: email,
         subject: 'New enquiry (' + type + ') — ' + name,
         text: 'Name: ' + name + '\nEmail: ' + email + '\nPhone: ' + (phone || '-') + '\nType: ' + type + '\n\n' + message,
       });
