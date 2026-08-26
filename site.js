@@ -7,7 +7,8 @@ document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
 var f=document.querySelector('.contact form');
 if(f){f.addEventListener('submit',function(e){e.preventDefault();
 var st=document.getElementById('fstatus');
-var data={name:f.name.value,email:f.email.value,phone:f.phone.value,type:f.type.value,message:f.message.value,company:f.company.value};
+var hpEl=f.elements['hp_check'];
+var data={name:f.name.value,email:f.email.value,phone:f.phone.value,type:f.type.value,message:f.message.value,hp:(hpEl?hpEl.value:'')};
 var btn=f.querySelector('button');btn.disabled=true;btn.textContent='Sending\u2026';
 fetch('/api/enquiry',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
 .then(function(r){if(!r.ok)throw new Error('api');return r.json()})
