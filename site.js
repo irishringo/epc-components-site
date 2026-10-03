@@ -26,9 +26,10 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 var KEY='epc-consent',v=null;try{v=localStorage.getItem(KEY);}catch(e){}
 if(v==='granted'||v==='denied')return;
 var b=document.createElement('div');b.className='cc';b.setAttribute('role','dialog');b.setAttribute('aria-label','Cookie choice');
-b.innerHTML='<p>We use analytics cookies to see how people use this site. No advertising, and nothing is sold on.</p><button type="button" class="cc-no">Reject</button><button type="button" class="cc-ok">Accept</button>';
+b.innerHTML='<p>We use analytics cookies to see how people use this site. No advertising, and nothing is sold on. <a href="/privacy">Privacy</a></p><button type="button" class="cc-no">Reject</button><button type="button" class="cc-ok">Accept</button>';
 function set(c){try{localStorage.setItem(KEY,c);}catch(e){}if(window.gtag)gtag('consent','update',{analytics_storage:c});b.remove();}
 b.querySelector('.cc-ok').addEventListener('click',function(){set('granted');});
 b.querySelector('.cc-no').addEventListener('click',function(){set('denied');});
 document.body.appendChild(b);
 })();
+document.addEventListener('click',function(e){var r=e.target.closest&&e.target.closest('[data-cookie-reset]');if(!r)return;e.preventDefault();try{localStorage.removeItem('epc-consent');}catch(x){}if(window.gtag)gtag('consent','update',{analytics_storage:'denied'});location.reload();});

@@ -293,3 +293,18 @@ nav a.cta[aria-current]{background:var(--ink);color:var(--paper)}
 .fine{color:rgba(240,238,230,.56)}
 .ct-info .k{color:rgba(240,238,230,.6)}
 .f-note{color:rgba(240,238,230,.6)}
+
+/* tap-to-call: in the nav on wide screens, a strip above the header on smaller ones */
+.m-call{display:none}
+nav a.tel{color:var(--ink);font-weight:500}
+@media(max-width:1080px){nav a.tel{display:none}.m-call{display:block;text-align:center;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:9px 20px}.m-call b{color:var(--gold);font-weight:500}}
+/* long-form text pages (privacy, guides) */
+.legal{max-width:760px}
+.legal h2{font-family:var(--cond);font-weight:600;text-transform:uppercase;font-size:1.45rem;letter-spacing:.02em;margin:38px 0 12px;color:var(--ink)}
+.legal h2:first-child{margin-top:0}
+.legal h3{font-family:var(--sans);font-weight:600;font-size:1.05rem;margin:24px 0 6px;color:var(--ink)}
+.legal p,.legal li{margin:0 0 12px;line-height:1.65}
+.legal ul{padding-left:20px;margin:0 0 12px}
+.legal a{color:#86692a}
+.ph{background:rgba(201,169,106,.25);padding:2px 6px;font-family:var(--mono);font-size:.8em;letter-spacing:.04em}
+.cc p a{color:var(--gold)}
