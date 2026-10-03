@@ -291,3 +291,5 @@ nav a.cta[aria-current]{background:var(--ink);color:var(--paper)}
 .all-link{color:#86692a;border-bottom-color:#86692a}
 .tb-k{color:rgba(240,238,230,.56)}
 .fine{color:rgba(240,238,230,.56)}
+.ct-info .k{color:rgba(240,238,230,.6)}
+.f-note{color:rgba(240,238,230,.6)}
