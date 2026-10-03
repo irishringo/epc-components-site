@@ -269,3 +269,10 @@ nav a.cta[aria-current]{background:var(--ink);color:var(--paper)}
 .case .fact-list{margin-top:30px}
 .case-links{margin-top:6px}
 @media(max-width:900px){.case{grid-template-columns:1fr;gap:44px;padding-bottom:64px}}
+
+/* cookie consent banner */
+.cc{position:fixed;left:16px;right:16px;bottom:16px;z-index:999;max-width:560px;margin:0 auto;background:var(--ink);color:var(--paper);border:1px solid var(--w-line);padding:16px 18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;font:400 14px/1.45 var(--sans);box-shadow:0 8px 30px rgba(0,0,0,.25)}
+.cc p{margin:0;flex:1 1 260px}
+.cc button{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:11px 16px;cursor:pointer;border:1px solid var(--gold)}
+.cc .cc-ok{background:var(--gold);color:var(--ink)}
+.cc .cc-no{background:transparent;color:var(--paper)}

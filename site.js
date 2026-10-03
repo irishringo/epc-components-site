@@ -12,11 +12,23 @@ var data={name:f.name.value,email:f.email.value,phone:f.phone.value,type:f.type.
 var btn=f.querySelector('button');btn.disabled=true;btn.textContent='Sending\u2026';
 fetch('/api/enquiry',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
 .then(function(r){if(!r.ok)throw new Error('api');return r.json()})
-.then(function(){if(st){st.className='f-status ok';st.textContent='Enquiry sent \u2014 confirmation on its way to your inbox.'}f.reset();btn.textContent='Sent';})
+.then(function(){if(st){st.className='f-status ok';st.textContent='Enquiry sent \u2014 confirmation on its way to your inbox.'}if(window.gtag)gtag('event','generate_lead',{enquiry_type:data.type});f.reset();btn.textContent='Sent';})
 .catch(function(){
 var n=encodeURIComponent(data.name),em=encodeURIComponent(data.email),ph=encodeURIComponent(data.phone),t=encodeURIComponent(data.type),msg=encodeURIComponent(data.message);
 location.href='mailto:enquiries@epccomponents.ie?cc=colmring2020@gmail.com&subject=Project%20Enquiry%20('+t+')&body=Name:%20'+n+'%0AEmail:%20'+em+'%0APhone:%20'+ph+'%0A%0A'+msg;
 btn.disabled=false;btn.textContent='Send enquiry';
 });
 })}
+})();
+(function(){
+function track(n,p){if(window.gtag)gtag('event',n,p||{});}
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="tel:"],a[href^="mailto:"]');if(!a)return;var h=a.getAttribute('href');if(h.indexOf('tel:')===0)track('click_to_call',{link_url:h});else track('click_email',{link_url:h});});
+var KEY='epc-consent',v=null;try{v=localStorage.getItem(KEY);}catch(e){}
+if(v==='granted'||v==='denied')return;
+var b=document.createElement('div');b.className='cc';b.setAttribute('role','dialog');b.setAttribute('aria-label','Cookie choice');
+b.innerHTML='<p>We use analytics cookies to see how people use this site. No advertising, and nothing is sold on.</p><button type="button" class="cc-no">Reject</button><button type="button" class="cc-ok">Accept</button>';
+function set(c){try{localStorage.setItem(KEY,c);}catch(e){}if(window.gtag)gtag('consent','update',{analytics_storage:c});b.remove();}
+b.querySelector('.cc-ok').addEventListener('click',function(){set('granted');});
+b.querySelector('.cc-no').addEventListener('click',function(){set('denied');});
+document.body.appendChild(b);
 })();
