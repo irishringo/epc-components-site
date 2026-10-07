@@ -312,3 +312,7 @@ nav a.tel{color:var(--ink);font-weight:500}
 /* header fits with phone link */
 @media(min-width:1081px){.hdr-meta{display:none}}
 @media(min-width:1081px) and (max-width:1279px){nav a{padding:0 15px}}
+
+/* Ian portrait */
+.prof-img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border:1px solid var(--line)}
+@media(max-width:680px){.prof-img{max-width:170px}}
